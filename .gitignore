@@ -3,6 +3,7 @@
 # ==============================================================================
 labeled-dataset/
 originals-dataset/
+preview_images/
 *.zip
 *.tar.gz
 *.tar
