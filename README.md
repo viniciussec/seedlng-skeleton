@@ -89,6 +89,13 @@ Você pode iniciar os notebooks com Jupyter Lab, Jupyter Notebook ou diretamente
 jupyter notebook
 ```
 
+### 5. Executar a Interface Web Interativa (HTML/JS)
+O projeto inclui um aplicativo web para teste rápido, seleção e upload de máscaras anotadas (`labeled-dataset/`) e comparação visual simultânea das 4 técnicas:
+```bash
+python3 server.py
+```
+Acesse no seu navegador: `http://localhost:8080`
+
 ---
 
 ## 🛠️ Tecnologias e Bibliotecas
