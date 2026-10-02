@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seedling Skeleton Studio — Comparador de Esqueletização de Plântulas</title>
-  <meta name="description" content="Aplicação interativa para extração e comparação de esqueletos de plântulas de soja via Zhang-Suen, Lee, MAT Puro e MAT com Poda.">
+  <meta name="description" content="Aplicação interativa para extração e comparação de esqueletos de plântulas de soja via Zhang-Suen, Lee, MAT Puro e Zhang-Suen com Poda EDT.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -76,7 +76,7 @@
     <!-- Processing State -->
     <div class="loading-state" id="loading-state" style="display: none;">
       <div class="spinner"></div>
-      <p id="loading-message">Processando esqueletos via Zhang-Suen, Lee, MAT Puro e MAT com Poda...</p>
+      <p id="loading-message">Processando esqueletos via Zhang-Suen, Lee, MAT Puro e Zhang-Suen com Poda EDT...</p>
     </div>
 
     <!-- Results Section -->
@@ -133,13 +133,13 @@
         <div class="model-panel-card">
           <div class="card-header">
             <div>
-              <h3>Visualização Padronizada em 4 Painéis (Célula 7 — Modelo MAT com Poda)</h3>
+              <h3>Visualização Padronizada em 4 Painéis (Modelo de Referência: Zhang-Suen + Poda EDT)</h3>
               <p class="text-muted">Entrada original, hipocótilo binário e esqueletos de espessura real de 1 pixel</p>
             </div>
             <div class="model-algo-selector">
               <label for="model-algo-select">Exibir Esqueleto de:</label>
               <select id="model-algo-select">
-                <option value="poda">1. MAT com Poda a Distância (Modelo)</option>
+                <option value="poda">1. Zhang-Suen + Poda EDT (Modelo B-spline)</option>
                 <option value="zhang_suen">2. Zhang-Suen Puro (1984)</option>
                 <option value="lee">3. Lee & Kashyap Puro (1994)</option>
                 <option value="mat_puro">4. MAT Puro (Blum 1967)</option>

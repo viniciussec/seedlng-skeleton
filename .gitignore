@@ -4,6 +4,7 @@
 labeled-dataset/
 originals-dataset/
 preview_images/
+analise_graficos/
 *.zip
 *.tar.gz
 *.tar

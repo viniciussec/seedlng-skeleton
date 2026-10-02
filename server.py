@@ -195,7 +195,9 @@ def process_image(mask_bgr, pixels_per_cm=100.0, min_comp_size=30):
     _, n_hyp_comp = label(mask_hyp_clean)
     _, n_root_comp = label(mask_root_clean)
     
-    # 1. MAT com Poda a Distância
+    # 1. Zhang-Suen com Poda a Distância (EDT) + B-splines
+    # NOTA: O esqueleto inicial é gerado por skimage.morphology.skeletonize (Zhang-Suen),
+    # filtrado via Transformada de Distância Euclidiana (EDT) e interpolado por B-splines.
     t0 = time.time()
     dist_h = distance_transform_edt(mask_hyp_clean)
     dist_r = distance_transform_edt(mask_root_clean)
@@ -246,9 +248,9 @@ def process_image(mask_bgr, pixels_per_cm=100.0, min_comp_size=30):
     
     algorithms = {
         "poda": {
-            "name": "MAT com Poda a Distância",
-            "tag": "Modelo de Referência",
-            "description": "Transformada do Eixo Medial com poda morfológica adaptativa fundamentada no campo de distâncias, filtrando espículas espúrias e medindo comprimento contínuo via B-splines.",
+            "name": "Zhang-Suen + Poda EDT (Modelo)",
+            "tag": "Modelo de Referência (B-spline)",
+            "description": "Afinamento de Zhang-Suen com poda morfológica adaptativa fundamentada no campo de distâncias euclidianas (EDT), eliminando espículas espúrias e medindo comprimento contínuo via B-splines (anteriormente denominado MAT com Poda).",
             "time_ms": round(t_poda, 2),
             "hypocotyl": {
                 "pixels": px_h_p,

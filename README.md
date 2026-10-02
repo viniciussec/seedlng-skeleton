@@ -6,27 +6,27 @@ Este repositório contém um estudo comparativo rigoroso de algoritmos de **esqu
 
 ## 📌 Técnicas Avaliadas
 
-O projeto implementa e analisa comparativamente quatro abordagens clássicas e modernas de extração de esqueleto:
+O projeto implementa e analisa comparativamente quatro abordagens de extração de esqueleto:
 
-1. **Zhang-Suen (1984) — Afinamento Puro:**
-   * Algoritmo iterativo paralelo baseado em duas sub-iterações morfológicas de remoção de pixels de contorno que preservam a conectividade 8-vizinhos.
-   * Rápido e amplamente utilizado, com tendência a preservar detalhes finos.
+1. **Zhang-Suen com Poda Baseada em Distância (EDT) e B-splines (Modelo de Referência):**
+   * *Nota Teórica:* Frequentemente intitulado informalmente de *"MAT com Poda"*, o extrator de esqueleto base é na verdade o algoritmo de afinamento paralelo de **Zhang-Suen (1984)** (`skimage.morphology.skeletonize`). O componente relacionado ao MAT reside na aplicação da **Transformada de Distância Euclidiana (EDT - `distance_transform_edt`)**, utilizada para calcular a espessura local, podar ramos espúrios e guiar a interpolação suave por **B-splines cúbicas**.
+   * Elimina mais de 90% das espículas mantendo alta fidelidade geométrica.
 
-2. **Lee & Kashyap (1994) — Afinamento Topológico Puro:**
-   * Algoritmo de afinamento baseado em número de Euler e conectividade topológica (implementado via `skimage.morphology.skeletonize(..., method='lee')`).
-   * Produz esqueletos estritamente conexos e com espessura de 1 pixel.
+2. **Zhang-Suen (1984) — Afinamento Puro:**
+   * Algoritmo iterativo paralelo clássico baseado em sub-iterações morfológicas de remoção de pixels de contorno que preservam a conectividade 8-vizinhos (`method='zhang'`).
+   * Rápido e sensível ao contorno, sem fechamento morfológico nem poda de espículas.
 
-3. **Transformada do Eixo Medial (MAT Puro) de Harry Blum (1967):**
-   * Esqueletização geométrica baseada nos centros das esferas/círculos maximais inscritos no objeto, calculados via campo de distâncias (*Distance Transform*).
-   * Sem podas, suscetível a ramificações espúrias causadas por irregularidades na borda.
+3. **Lee & Kashyap (1994) — Afinamento Topológico Puro:**
+   * Algoritmo de afinamento topológico baseado em número de Euler e invariância de gênero (`method='lee'`).
+   * Produz esqueletos estritamente unitários e limpos, mas apresenta encurtamento sistemático (*corner-cutting*) nas curvaturas anatômicas.
 
-4. **MAT com Poda Baseada em Distância (*Pruning*):**
-   * Transformada do eixo medial enriquecida com filtragem morfológica e poda adaptativa de ramos espúrios fundamentada na função distância ao bordo, mantendo apenas a espinha dorsal biológica da plântula.
+4. **Transformada do Eixo Medial (MAT Puro) de Harry Blum (1967):**
+   * A verdadeira transformada geométrica do eixo medial via cristas do campo de distâncias e centros de discos maximais inscritos (`skimage.morphology.medial_axis`).
+   * Sem poda morfológica, é altamente suscetível a ramificações espúrias induzidas por rugosidades do contorno.
 
-5. **Comparação Geral Consolidada:**
-   * Notebook comparativo que executa as 4 abordagens lado a lado sobre os mesmos espécimes, gerando métricas visuais e quantitativas de preservação topológica e tempo de processamento.
+5. **Comparação Geral Consolidada & Benchmark em Lote:**
+   * Análise em lote das 170 imagens (~50 plântulas/imagem, totalizando 8.477 plântulas) e notebook analítico dedicado com métricas de comprimento (em pixels `px`), taxa de espículas e trade-offs computacionais.
 
----
 
 ## 📂 Estrutura do Projeto
 
